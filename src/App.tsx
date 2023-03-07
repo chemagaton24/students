@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { GloablStyles } from "./components/common/GlobalStyles.style";
+import { Container } from "./components/display/Container";
+import Students from "./components/Students";
+import Profile from "./components/Students/Profile";
 
-function App() {
+const queryClient = new QueryClient();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <GloablStyles />
+      <QueryClientProvider client={queryClient}>
+        <Container>
+          <Routes>
+            <Route path="/" element={<Students />} />
+            <Route path="/:id" element={<Profile />} />
+          </Routes>
+        </Container>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
