@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/students">
       <GloablStyles />
       <QueryClientProvider client={queryClient}>
         <Container>
